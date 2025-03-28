@@ -2820,12 +2820,6 @@
 		(uuid "025dd642-99e8-457d-a488-f5c53b6938dd")
 	)
 	(junction
-		(at 179.07 105.41)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "187506ca-2cb8-47e0-97b1-a4951888508d")
-	)
-	(junction
 		(at 223.52 105.41)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -2854,12 +2848,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "84909296-e680-4b0e-9ef3-d658ad3ac94b")
-	)
-	(junction
-		(at 179.07 93.98)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a26c3c67-5c98-43a9-920c-5631df57f514")
 	)
 	(junction
 		(at 223.52 91.44)
@@ -3103,6 +3091,16 @@
 	)
 	(wire
 		(pts
+			(xy 179.07 81.28) (xy 179.07 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37cc1dff-0a80-45b2-9a83-7556509a23dc")
+	)
+	(wire
+		(pts
 			(xy 38.1 24.13) (xy 38.1 39.37)
 		)
 		(stroke
@@ -3243,16 +3241,6 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 93.98) (xy 181.61 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5550b214-4734-42bc-8d7d-9e71c5188036")
-	)
-	(wire
-		(pts
 			(xy 210.82 81.28) (xy 223.52 81.28)
 		)
 		(stroke
@@ -3313,16 +3301,6 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 93.98) (xy 179.07 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "73b71ec0-a3d1-4a7f-af2e-cf14172e10b0")
-	)
-	(wire
-		(pts
 			(xy 27.94 31.75) (xy 43.18 31.75)
 		)
 		(stroke
@@ -3340,6 +3318,16 @@
 			(type default)
 		)
 		(uuid "74cdcc7d-40ac-47f4-b495-0f8ba7a8bebc")
+	)
+	(wire
+		(pts
+			(xy 181.61 96.52) (xy 181.61 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78e835cd-6add-4652-9a5d-cb22016dfc7e")
 	)
 	(wire
 		(pts
@@ -3473,7 +3461,7 @@
 	)
 	(wire
 		(pts
-			(xy 179.07 105.41) (xy 186.69 105.41)
+			(xy 171.45 105.41) (xy 186.69 105.41)
 		)
 		(stroke
 			(width 0)
@@ -3490,16 +3478,6 @@
 			(type default)
 		)
 		(uuid "a1922ca3-8abf-4fe4-8ce6-7956dbb0e02e")
-	)
-	(wire
-		(pts
-			(xy 179.07 81.28) (xy 179.07 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a48cb9bb-0fbb-4399-83fd-f691586bbec1")
 	)
 	(wire
 		(pts
@@ -3673,13 +3651,13 @@
 	)
 	(wire
 		(pts
-			(xy 171.45 105.41) (xy 179.07 105.41)
+			(xy 179.07 96.52) (xy 181.61 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "efc43268-19ca-499b-81e3-f08bc6a2a915")
+		(uuid "f3d55bfd-a4d9-45cf-8980-e840882aad0a")
 	)
 	(wire
 		(pts
@@ -4482,7 +4460,7 @@
 	)
 	(global_label "Potar out"
 		(shape input)
-		(at 181.61 93.98 270)
+		(at 179.07 96.52 270)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4492,7 +4470,7 @@
 		)
 		(uuid "e80bc1d1-d1f6-41b8-99c6-e13866ccd8d1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 181.61 106.1315 90)
+			(at 179.07 108.6715 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5674,76 +5652,6 @@
 			(project "capteur graphite CouBeh"
 				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
 					(reference "#PWR011")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 179.07 101.6 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "5c6bf0bd-f275-405a-afbc-3e76acba6ea2")
-		(property "Reference" "R1"
-			(at 181.61 100.3299 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1k"
-			(at 181.61 102.8699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
-			(at 177.292 101.6 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 179.07 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 179.07 101.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3c7920fc-5ba4-44df-a0c5-0b96a5bf5a11")
-		)
-		(pin "2"
-			(uuid "1d576b5e-d9e6-4b11-9149-d000bdffe413")
-		)
-		(instances
-			(project ""
-				(path "/e63e39d7-6ac0-4ffd-8aa3-1841a4541b55"
-					(reference "R1")
 					(unit 1)
 				)
 			)
