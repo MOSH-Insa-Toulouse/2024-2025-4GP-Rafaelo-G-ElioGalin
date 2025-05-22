@@ -1,0 +1,204 @@
+//---------------------------- Bibliothèques ----------------------------
+#include <SoftwareSerial.h>
+#include <Wire.h>
+#include <Adafruit_SSD1306.h>
+#include <SPI.h>
+
+//---------------------------- Définitions ----------------------------
+
+#define BT_RX_PIN 8
+#define BT_TX_PIN 7
+#define BT_BAUDRATE 9600
+
+#define ENCODER_CLK_PIN 2
+#define ENCODER_DT_PIN 4
+#define ENCODER_SW_PIN 5
+
+#define OLED_WIDTH 128
+#define OLED_HEIGHT 64
+#define OLED_RESET -1
+#define OLED_ADDR 0x3C
+
+#define GRAPHITE_SENSOR_PIN A0
+const float VCC = 5.0;
+
+const float R2 = 100000;
+const float R4 = 100000;
+const float R3 = 10000;
+
+#define POT_CS_PIN 10
+const int POT_MAX_POS = 256;
+const long POT_BASE_RESISTANCE = 33800;
+float potResistanceExtern;
+const byte POT_WIPER_OFFSET = 125;
+const byte POT_ADDR_0 = 0x11;
+
+const int NB_MENU_ITEMS = 2;
+
+//---------------------------- Objets ----------------------------
+
+SoftwareSerial bluetoothSerial(BT_RX_PIN, BT_TX_PIN);
+Adafruit_SSD1306 oledDisplay(OLED_WIDTH, OLED_HEIGHT, &Wire, OLED_RESET);
+
+//---------------------------- Variables ----------------------------
+
+volatile int encoderPosition = 0;
+int menuSelection = 0;
+bool inSubMenu = false;
+unsigned long lastDisplayUpdate = 0;
+
+//---------------------------- Fonctions encodeur ----------------------------
+
+void onEncoderInterrupt() {
+  if (digitalRead(ENCODER_CLK_PIN) == HIGH) {
+    if (digitalRead(ENCODER_DT_PIN) == HIGH) encoderPosition++;
+    else encoderPosition--;
+  }
+}
+
+void checkEncoderButton() {
+  if (digitalRead(ENCODER_SW_PIN) == LOW) {
+    delay(50);
+    if (digitalRead(ENCODER_SW_PIN) == LOW) {
+      inSubMenu = !inSubMenu;
+      while (digitalRead(ENCODER_SW_PIN) == LOW);
+    }
+  }
+}
+
+//---------------------------- Fonctions capteur ----------------------------
+
+float readGraphiteVoltage() {
+  int adcValue = analogRead(GRAPHITE_SENSOR_PIN);
+  return adcValue * VCC / 1023.0;
+}
+
+float calculateGraphiteResistance() {
+  float Vadc = readGraphiteVoltage();
+  float Rmes = potResistanceExtern;
+  if (Vadc < 0.01) return -1.0;
+  float resistance = R2 * (1.0 + R4 / Rmes) * VCC / Vadc - R2 - R3;
+  return max(resistance, 0.0);
+}
+
+void setDigitalPotentiometer(int addr, int position) {
+  position = constrain(position, 0, 255);
+  digitalWrite(POT_CS_PIN, LOW);
+  SPI.transfer(addr);
+  SPI.transfer(position);
+  digitalWrite(POT_CS_PIN, HIGH);
+  potResistanceExtern = (POT_BASE_RESISTANCE * position / POT_MAX_POS) + POT_WIPER_OFFSET;
+}
+
+void calibratePotentiometer() {
+  const float targetVoltage = 3.0;
+  const float tolerance = 0.15;
+  int pos = 0;
+
+  do {
+    setDigitalPotentiometer(POT_ADDR_0, pos);
+    pos += 5;
+    delay(200);
+  } while ((readGraphiteVoltage() < targetVoltage - tolerance || readGraphiteVoltage() > targetVoltage + tolerance) && pos <= 255);
+
+  if (pos <= 255) {
+    Serial.print(F("Potentiometre calibre a : "));
+    Serial.println(pos);
+  } else {
+    Serial.println(F("Echec calibration"));
+  }
+}
+
+//---------------------------- OLED ----------------------------
+
+void displayMenu() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - lastDisplayUpdate >= 500) {
+    lastDisplayUpdate = currentMillis;
+    checkEncoderButton();
+    menuSelection = abs(encoderPosition) % NB_MENU_ITEMS;
+
+    oledDisplay.clearDisplay();
+    oledDisplay.setTextSize(2);
+    oledDisplay.setCursor(0, 0);
+    oledDisplay.setTextColor(SSD1306_WHITE);
+
+    if (!inSubMenu) {
+      oledDisplay.println(F("* MENU *"));
+      oledDisplay.setTextSize(1);
+
+      oledDisplay.setTextColor(menuSelection == 0 ? SSD1306_BLACK : SSD1306_WHITE, menuSelection == 0 ? SSD1306_WHITE : SSD1306_BLACK);
+      oledDisplay.println(F("Mesure Graphite"));
+
+      oledDisplay.setTextColor(menuSelection == 1 ? SSD1306_BLACK : SSD1306_WHITE, menuSelection == 1 ? SSD1306_WHITE : SSD1306_BLACK);
+      oledDisplay.println(F("Infos Createurs"));
+    } else {
+      switch (menuSelection) {
+        case 0: {
+          oledDisplay.setTextSize(1);
+          oledDisplay.println(F("* Mesure Graphite *"));
+          float voltage = readGraphiteVoltage();
+          float resistance = calculateGraphiteResistance();
+
+          oledDisplay.print(F("Tension : "));
+          oledDisplay.print(voltage, 2);
+          oledDisplay.println(F(" V"));
+
+          oledDisplay.print(F("Resistance : "));
+          if (resistance < 0) {
+            oledDisplay.println(F("Erreur"));
+          } else {
+            oledDisplay.print(resistance, 0);
+            oledDisplay.println(F(" ohms"));
+          }
+          break;
+        }
+        case 1: {
+          oledDisplay.setTextSize(1);
+          oledDisplay.println(F("* Createurs *"));
+          oledDisplay.println(F("Projet : Capteur Graphite Coubeh"));
+          oledDisplay.println(F("Nom 1 : Elio Galin"));
+          oledDisplay.println(F("Nom 2 : Rafaelo Gerardin"));
+          oledDisplay.println(F("2025"));
+          break;
+        }
+      }
+    }
+
+    oledDisplay.display();
+  }
+}
+
+//---------------------------- Setup ----------------------------
+
+void setup() {
+  pinMode(ENCODER_CLK_PIN, INPUT_PULLUP);
+  pinMode(ENCODER_DT_PIN, INPUT_PULLUP);
+  pinMode(ENCODER_SW_PIN, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(ENCODER_CLK_PIN), onEncoderInterrupt, RISING);
+
+  pinMode(BT_RX_PIN, INPUT);
+  pinMode(BT_TX_PIN, OUTPUT);
+  bluetoothSerial.begin(BT_BAUDRATE);
+  Serial.begin(BT_BAUDRATE);
+
+  if (!oledDisplay.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) while (1);
+  oledDisplay.clearDisplay();
+
+  pinMode(GRAPHITE_SENSOR_PIN, INPUT);
+
+  pinMode(POT_CS_PIN, OUTPUT);
+  digitalWrite(POT_CS_PIN, HIGH);
+  SPI.begin();
+
+  setDigitalPotentiometer(POT_ADDR_0, 128);
+  calibratePotentiometer();
+
+  Serial.println(F("Système prêt"));
+}
+
+//---------------------------- Loop ----------------------------
+
+void loop() {
+  displayMenu();
+}
