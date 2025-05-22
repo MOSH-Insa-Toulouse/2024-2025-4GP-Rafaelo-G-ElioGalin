@@ -1,14 +1,9 @@
 //---------------------------- Bibliothèques ----------------------------
-#include <SoftwareSerial.h>
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
 #include <SPI.h>
 
 //---------------------------- Définitions ----------------------------
-
-#define BT_RX_PIN 8
-#define BT_TX_PIN 7
-#define BT_BAUDRATE 9600
 
 #define ENCODER_CLK_PIN 2
 #define ENCODER_DT_PIN 4
@@ -37,7 +32,6 @@ const int NB_MENU_ITEMS = 2;
 
 //---------------------------- Objets ----------------------------
 
-SoftwareSerial bluetoothSerial(BT_RX_PIN, BT_TX_PIN);
 Adafruit_SSD1306 oledDisplay(OLED_WIDTH, OLED_HEIGHT, &Wire, OLED_RESET);
 
 //---------------------------- Variables ----------------------------
@@ -78,16 +72,7 @@ float calculateGraphiteResistance() {
   float Rmes = potResistanceExtern;
   if (Vadc < 0.01) return -1.0;
   float resistance = R2 * (1.0 + R4 / Rmes) * VCC / Vadc - R2 - R3;
-  return max(resistance, 0.0);
-}
-
-void sendDataBluetooth(float voltage, float resistance) {
-  // Envoie via Bluetooth la tension et la résistance formatées
-  bluetoothSerial.print("V=");
-  bluetoothSerial.print(voltage, 2);
-  bluetoothSerial.print("V; R=");
-  bluetoothSerial.print(resistance, 0);
-  bluetoothSerial.println(" ohms");
+  return resistance;
 }
 
 void setDigitalPotentiometer(int addr, int position) {
@@ -160,10 +145,6 @@ void displayMenu() {
             oledDisplay.print(resistance, 0);
             oledDisplay.println(F(" ohms"));
           }
-
-          // Envoi des données via Bluetooth
-          sendDataBluetooth(voltage, resistance);
-
           break;
         }
         case 1: {
@@ -177,7 +158,6 @@ void displayMenu() {
         }
       }
     }
-
     oledDisplay.display();
   }
 }
@@ -190,10 +170,7 @@ void setup() {
   pinMode(ENCODER_SW_PIN, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(ENCODER_CLK_PIN), onEncoderInterrupt, RISING);
 
-  pinMode(BT_RX_PIN, INPUT);
-  pinMode(BT_TX_PIN, OUTPUT);
-  bluetoothSerial.begin(BT_BAUDRATE);
-  Serial.begin(BT_BAUDRATE);
+  Serial.begin(9600);
 
   if (!oledDisplay.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) while (1);
   oledDisplay.clearDisplay();
@@ -214,4 +191,16 @@ void setup() {
 
 void loop() {
   displayMenu();
+
+  float resistance = calculateGraphiteResistance();
+
+  if (resistance >= 0) {
+    int resInt = (int) resistance;
+    int y = map(resInt, -1000, 1000, 0, 1000);
+    Serial.println(y);
+  } else {
+    Serial.println("Erreur");
+  }
+
+  delay(500);
 }
