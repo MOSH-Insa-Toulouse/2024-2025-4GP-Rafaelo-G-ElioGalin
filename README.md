@@ -121,7 +121,7 @@ Nous avons pu tracer ces courbes caractéristique de différents types de crayon
 
 [graphe de compression](/Photos/Graphe-compression.PNG)
 
-[graphe de flexion](/Photos/Grape-flexion.PNG)
+[graphe de flexion](/Photos/Graphe-Flexion.PNG)
 
 Vous pouvez retrouver cette datasheet [ici](/Datasheet/)
 
