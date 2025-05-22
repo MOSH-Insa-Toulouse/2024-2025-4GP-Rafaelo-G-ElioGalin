@@ -37,7 +37,7 @@ U = R * I --> I = U/R --> I très faible.
 
 Pour pouvoir obtenir des valeurs acceptable, il nous a fallu réaliser un circuit amplificateur à transimpédance : 
 
-![LTSpice-shema](/Photos/Circuit_LTSpice.PNG)
+![LTSpice-shema](/Photos/Circuit-LTSpice.PNG)
 
 Pour l'amplificateur opérationnel necessaire au circuit, nous avons choisi le LTC1050 pour sa capacité accepter un courant d'entrée faible et un offset de tension bas.
 
@@ -59,15 +59,15 @@ La réalisation du PCB implique l'utilisation de différents modules qu'il faut 
 
 Dans un premier temps, nous avons effectuée le shéma électrique : 
 
-![kicad-shema](/Photos/Kicad_photo.png)
+![kicad-shema](/Photos/Kicad-photo.png)
 
 Dans un second temps, un fois que tous les composants étaient bien relié entre eux, nous avons réalisé le PCB :
 
-![PCB-shema](/Photos/PCB-Projet_Capteur.png)
+![PCB-shema](/Photos/PCB-Projet-Capteur.png)
 
 Voici un visuel 3D de ce PCB pour avoir une idée du placement des composants :
 
-![pcb-3d](/Photos/Vue-3D_PCB.png)
+![pcb-3d](/Photos/Vue-3D-PCB.png)
 
 Vous pouvez tout retrouver dans le dossier [Kicad](/kicad/capteur graphite CouBeh).
 
@@ -119,9 +119,9 @@ Pour la réalisation de la datasheet, nous avons caractérisé le capteur graphi
 
 Nous avons pu tracer ces courbes caractéristique de différents types de crayons (2H,HB,2B,4B,6B): 
 
-[graphe de compression](/Photos/Graphe_compression.png)
+[graphe de compression](/Photos/Graphe-compression.png)
 
-[graphe de flexion](/Photos/Grape_flexion.png)
+[graphe de flexion](/Photos/Grape-flexion.png)
 
 Vous pouvez retrouver cette datasheet [ici](/Datasheet/)
 
