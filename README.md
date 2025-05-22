@@ -73,16 +73,17 @@ Vous pouvez tout retrouver dans le dossier [Kicad](/kicad/capteur graphite CouBe
 
 ## Réalisation physique du PCB
 
-Grâce à l'aide de Catherine Crouzet, nous avons pu fabrique le PCB nous même.
+Grâce à l'aide de Catherine Crouzet, nous avons pu fabriquer le PCB nous même.
 
-Pour ce faire, on creer un fichier Gerber depuis KiCAD :
-PHOTO
+Pour ce faire, on à d'abord creer un fichier Gerber depuis KiCAD :
 
-Ce filtre sert de masque de gravure. Il est placé sur une plaquette en epoxy jaune recouverte d'une fine couche de cuivre. 
+![gerber](/Photos/Gerber.PNG)
 
-Suite au processus, il faut percer les trous dans lequels les composants viendrons se loger, et souder les composants passifs ainsi que des connecteurs pour les différents modules pour facilité leur utilisation.(facile de changer de composants lorsqu'il y a un problème).
+Ce filtre sert de masque de gravure.Sur une plaquette en epoxy jaune recouverte d'une fine couche de cuivre, elle même recouverte d'une couche de résine, le masque est placé, il sert de porotection pour la résine lors de son passage sous une lampe d'UV. Apres son passage sous la lampe à UV, la plaquette est déposé dans un bain "révélateur", qui retire la couche de résine qui a été en contact avec les UV, et aussi le cuivre en dessous de cette résine. Après un contrôle visuel pour s'assurer de la bonne exécution du processus, la plaque est retiré du bain et lavée à l'eau pour retirer le produit du bain et ensuite à la cetone pour retirer la couche de résine qui a protégé les pistes en cuivre. Le PCB est maintenant près, on peut cliver les parties non nécessaire de la carte pour un rendu parfait.
 
-PHOTO peut etre
+Suite à ce processus, il faut percer les trous dans lequels les composants viendrons se loger, et souder les composants passifs ainsi que des connecteurs pour les différents modules pour facilité leur utilisation.(facile de changer de composants lorsqu'il y a un problème)
+
+/*PHOTO peut etre*/
 
 ## Code Arduino
 
