@@ -81,6 +81,15 @@ float calculateGraphiteResistance() {
   return max(resistance, 0.0);
 }
 
+void sendDataBluetooth(float voltage, float resistance) {
+  // Envoie via Bluetooth la tension et la résistance formatées
+  bluetoothSerial.print("V=");
+  bluetoothSerial.print(voltage, 2);
+  bluetoothSerial.print("V; R=");
+  bluetoothSerial.print(resistance, 0);
+  bluetoothSerial.println(" ohms");
+}
+
 void setDigitalPotentiometer(int addr, int position) {
   position = constrain(position, 0, 255);
   digitalWrite(POT_CS_PIN, LOW);
@@ -151,6 +160,10 @@ void displayMenu() {
             oledDisplay.print(resistance, 0);
             oledDisplay.println(F(" ohms"));
           }
+
+          // Envoi des données via Bluetooth
+          sendDataBluetooth(voltage, resistance);
+
           break;
         }
         case 1: {
