@@ -63,11 +63,11 @@ Dans un premier temps, nous avons effectuée le shéma électrique :
 
 Dans un second temps, un fois que tous les composants étaient bien relié entre eux, nous avons réalisé le PCB :
 
-![PCB-shema](/Photos/PCB-Projet-Capteur.png)
+![PCB-shema](/Photos/PCB-Projet-Capteur.PNG)
 
 Voici un visuel 3D de ce PCB pour avoir une idée du placement des composants :
 
-![pcb-3d](/Photos/Vue-3D-PCB.png)
+![pcb-3d](/Photos/Vue-3D-PCB.PNG)
 
 Vous pouvez tout retrouver dans le dossier [Kicad](/kicad/capteur graphite CouBeh).
 
@@ -119,9 +119,9 @@ Pour la réalisation de la datasheet, nous avons caractérisé le capteur graphi
 
 Nous avons pu tracer ces courbes caractéristique de différents types de crayons (2H,HB,2B,4B,6B): 
 
-[graphe de compression](/Photos/Graphe-compression.png)
+[graphe de compression](/Photos/Graphe-compression.PNG)
 
-[graphe de flexion](/Photos/Grape-flexion.png)
+[graphe de flexion](/Photos/Grape-flexion.PNG)
 
 Vous pouvez retrouver cette datasheet [ici](/Datasheet/)
 
