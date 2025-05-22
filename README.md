@@ -12,7 +12,7 @@ Ce cours se basant sur l'article "Pencil Drawn Strain Gauges and Chemiresistors 
 - [Principe du Projet](#principe-du-projet)
 - [Livrables](#livrables)
 - [LTSpice](#ltspice)
-- [Réalisation informatique du PCB sur KiCAD](#Réalisation-informatique-du PCB-sur-KiCAD
+- [Réalisation informatique du PCB sur KiCAD](#Réalisation-informatique-du PCB-sur-KiCAD)
 - [Réalisation physique du PCB](#Réalisation-physique-du-PCB)
 - [Code Arduino](#code-arduino)
 - [Application](#application)
