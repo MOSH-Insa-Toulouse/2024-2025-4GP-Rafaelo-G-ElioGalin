@@ -68,7 +68,7 @@ Voici un visuel 3D du PCB pour donner une idée du placement des composants :
 
 ![pcb-3d](/Photos/Vue-3D-PCB.PNG)
 
-Vous pouvez tout retrouver en détail dans le dossier [Kicad](/kicad/capteur graphite CouBeh).
+Vous pouvez tout retrouver en détail dans le dossier [Kicad](/kicad/).
 
 
 ## Réalisation physique du PCB
