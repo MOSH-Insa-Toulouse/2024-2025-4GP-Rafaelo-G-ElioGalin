@@ -119,9 +119,9 @@ Nous avons écrit une datasheet qui caractérise le capteur graphite. Nous avons
 
 Nous avons pu tracer ces courbes caractéristique de différents types de crayons (2H,HB,2B,4B,6B): 
 
-![graphe de compression](/Photos/Graphe-compression.PNG)
+![graphe de compression](/Photos/Figure-compression.PNG)
 
-![graphe de flexion](/Photos/Graphe-Flexion.PNG)
+![graphe de tension](/Photos/Figure-tension.PNG)
 
 Vous pouvez retrouver cette datasheet [ici](/Datasheet/)
 
