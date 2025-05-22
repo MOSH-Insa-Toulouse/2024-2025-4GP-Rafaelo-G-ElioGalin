@@ -25,7 +25,7 @@ const float R3 = 10000;
 const int POT_MAX_POS = 256;
 const long POT_BASE_RESISTANCE = 33800;
 float potResistanceExtern;
-const byte POT_WIPER_OFFSET = 125;
+const byte POT_OFFSET = 125;
 const byte POT_ADDR_0 = 0x11;
 
 const int NB_MENU_ITEMS = 2;
@@ -81,7 +81,7 @@ void setDigitalPotentiometer(int addr, int position) {
   SPI.transfer(addr);
   SPI.transfer(position);
   digitalWrite(POT_CS_PIN, HIGH);
-  potResistanceExtern = (POT_BASE_RESISTANCE * position / POT_MAX_POS) + POT_WIPER_OFFSET;
+  potResistanceExtern = (POT_BASE_RESISTANCE * position / POT_MAX_POS) + POT_OFFSET;
 }
 
 void calibratePotentiometer() {
