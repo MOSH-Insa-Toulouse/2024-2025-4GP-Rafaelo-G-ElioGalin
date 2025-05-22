@@ -121,11 +121,11 @@ Nous avons pu tracer ces courbes caractéristique de différents types de crayon
 
 Compression :
 
-![graphe de compression](/Photos/Figure-compression.PNG)
+![graphe de compression](/Photos/Figure_compression.PNG)
 
 Tension:
 
-![graphe de tension](/Photos/Figure-tension.PNG)
+![graphe de tension](/Photos/Figure_tension.PNG)
 
 Vous pouvez retrouver cette datasheet [ici](/Datasheet/)
 
