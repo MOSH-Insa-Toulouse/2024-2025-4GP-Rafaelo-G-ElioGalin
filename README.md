@@ -86,18 +86,15 @@ Suite à ce processus, nous avons percé les trous dans lesquels des composants 
 
 ## Code Arduino
 
-Les differents modules sont contrôlés par un code Arduino. Nous utilisons les librairies : 
-
-- Adafruit_SSD1306 pour contrôler l'écran OLED
-- SoftwareSerial pour contrôler le Bluetooth
-
-Vous trouverez le code Arduino [ici]()
+Les differents modules sont contrôlés par un code Arduino 
 
 Au branchement de l'Arduino UNO, après avoir envoyé le code, on peut voir sur l'écran OLED un menu déroulant:
 
 -Menu 1 : Graphite sensor
 
 La navigation se fait avec l'encodeur rotatoir, le faire tourner permets de faire defiler les menus, et le cliquer permet d'accéder au menu sélectionné.
+
+Vous trouverez le code Arduino [ici](/Code-Arduino/)
 
 ## Application
 
