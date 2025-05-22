@@ -79,20 +79,19 @@ Pour ce faire, nous avons tout d'abord créé un fichier Gerber depuis KiCAD :
 
 ![gerber](/Photos/Gerber.PNG)
 
-Ce filtre sert de masque de gravure. Sur une plaquette en epoxy jaune recouverte d'une fine couche de cuivre, elle même recouverte d'une couche de résine, le masque est placé, il sert de porotection pour la résine lors de son passage sous une lampe d'UV. Apres son passage sous la lampe à UV, la plaquette est déposé dans un bain "révélateur", qui retire la couche de résine qui a été en contact avec les UV, et aussi le cuivre en dessous de cette résine. Après un contrôle visuel pour s'assurer de la bonne exécution du processus, la plaque est retiré du bain et lavée à l'eau pour retirer le produit du bain et ensuite à la cetone pour retirer la couche de résine qui a protégé les pistes en cuivre. Le PCB est maintenant près, on peut cliver les parties non nécessaire de la carte pour un rendu parfait.
+Ce filtre sert de masque de gravure. On place le masque sur une plaquette en epoxy jaune recouverte d'une fine couche de cuivre, elle même recouverte d'une couche de résine. Il sert de porotection pour la résine lors de son passage sous une lampe UV. Apres son passage sous la lampe à UV, la plaquette est déposé dans un bain "révélateur", qui retire la couche de résine qui a été en contact avec les UV, et aussi le cuivre en dessous de cette résine. Après un contrôle visuel pour s'assurer de la bonne exécution du processus, la plaque est retiré du bain et lavée à l'eau pour retirer le produit du bain et ensuite à l'acétone pour retirer la couche de résine qui a protégé les pistes en cuivre. Le PCB est maintenant près, on peut couper les parties non nécessaire de la carte pour un rendu plus propre.
 
-Suite à ce processus, il faut percer les trous dans lequels les composants viendrons se loger, et souder les composants passifs ainsi que des connecteurs pour les différents modules pour facilité leur utilisation.(facile de changer de composants lorsqu'il y a un problème)
+Suite à ce processus, nous avons percé les trous dans lesquels des composants ainsi que des connecteurs des différents modules, puis nous les avons soudés.
 
-/*PHOTO peut etre*/
 
 ## Code Arduino
 
-Pour pouvoir contrôler les differents modules sur le Arduino UNO, nous avons réalisé un code Arduino. Nous utilisons les libraires : 
+Les differents modules sont contrôlés par un code Arduino. Nous utilisons les librairies : 
 
 - Adafruit_SSD1306 pour contrôler l'écran OLED
 - SoftwareSerial pour contrôler le Bluetooth
 
-Vous pouvez trouver le code Arduino [ici]()
+Vous trouverez le code Arduino [ici]()
 
 Au branchement de l'Arduino UNO, après avoir envoyé le code, on peut voir sur l'écran OLED un menu déroulant:
 
@@ -102,21 +101,21 @@ La navigation se fait avec l'encodeur rotatoir, le faire tourner permets de fair
 
 ## Application
 
-Nous avons utilisé  le site MIT App Inventor pour réalisé l'application. Elle recoit et affiche sur un graphe les valeurs du Capeur graphite.
+Nous avons utilisé  le site MIT App Inventor pour réalisé l'application qui reçoit et affiche en temps réel les valeurs mesurées par le Capeur graphite sur un graphe.
 
 PHOTO
 
-L'application est assez simple, Elle permet :
+L'application est assez simple. Elle permet :
 - De se connecter à un appareil via le bluetooth.
 - De démarrer une acquisition et de la mettre en pause.
 - d'effacer le graphe.
 - De s'adapter en cas de changement de position du téléphone en offrant un mode paysage.
 
-Vous pouvez la retrouver [ici](/Application Projet Capteur/)
+Vous la trouverez [ici](/Application Projet Capteur/)
 
 ## Datasheet
 
-Pour la réalisation de la datasheet, nous avons caractérisé le capteur graphite grâce à notre système ainsi que d'une impression 3D d'un module composé de demi-cercles offrant une déformation croissante.
+Nous avons écrit une datasheet qui caractérise le capteur graphite. Nous avons réalisé les mesures avec notre système et à l'aide d'un module 3D composé de demi-cercles permettant une déformation croissante précise.
 
 Nous avons pu tracer ces courbes caractéristique de différents types de crayons (2H,HB,2B,4B,6B): 
 
@@ -128,19 +127,20 @@ Vous pouvez retrouver cette datasheet [ici](/Datasheet/)
 
 ## Conclusion
 
-Tous résultats est à  prendre avec des pincettes, nous ne pouvons pas affirmer avoir réalisé un dépots parfaitement uniforme sur tous les capteurs, ce qui peut avoir un fort impact sur la valeur de resistance du capteur, et donc de son comprtement. De plus, la qualité du matériel utilisé n'est pas forcement adéquate, les composants ne sont pas parfait, les connexions non plus, et cela peut jouer beaucoup sur la valeur mesuré.
+Tous nos résultats sont à  prendre avec prudence. Nous ne pouvons pas affirmer avoir réalisé un dépot de graphite parfaitement uniforme sur tous les capteurs, ce qui a pu avoir un impact important sur la valeur de leur résistance, et donc sur leur comprtement. De plus, la qualité du matériel utilisé n'est pas  optimale : les composants et les connexions présentent des imperfections qui ont pu influencer les mesures obtenues.
 
-Cependant, Ce capteur à l'avantage d'être très versatile, peu couteux et très simple à mettre en place, l'électronique peu etre miniaturisé facillement et il est assez sensible. Si son principal problème, l'homogénisation du dépots de graphite, peut être corrigé, alors il pourrait potentiellement être utilisé dans un cadre industriel pour des applications rapide, à usage unique ou en très grande quantité.
-Ou bien dans un cadre personnel car possède aussi une grande valeur pédagogique comme on a pu le voir à travers ce projet, il permet de toucher à pleins de domaines différents. 
+Cela dit, ce capteur présente plusieurs avantages : il est très versatile, peu coûteux, et extrêmement simple d’utilisation. L’électronique associée peut être facilement miniaturisée, et le capteur s’avère relativement sensible. Son principal défaut reste cependant l’homogénéité du dépôt de graphite. Si ce point pouvait être amélioré, le capteur pourrait être envisagé pour des applications industrielles, notamment pour des usages ponctuels, à grande échelle, ou à usage unique.
+Dans un cadre personnel ou éducatif, ce capteur est particulièrement adapté. Il possède une forte valeur pédagogique, comme en témoigne ce projet, en permettant d’explorer de nombreux domaines scientifiques et techniques.
 
-Donc est ce qu'il pourrait être industrialisable ? 
+Ce capteur est-il industrialisable ? 
 
 Oui et non.
 
-Il pourrait trouver un secteur d'utilisation comme l'aviation qui a besoin d'un très grand nombre de capteurs de contraintes, et dont l'aspect économique pourrait intéresser. Même si ses contraintes électronique pourrait poser problème par soucis de place malgrès une miniaturisation. 
-Il pourrait être démocratisé dans l'éducation comme outils d'apprentissage, ou de découverte. 
+Il pourrait trouver une application dans des secteurs comme l’aviation, où l’on utilise un très grand nombre de capteurs de contrainte. Son faible coût pourrait représenter un avantage économique. Néanmoins, ses limitations électroniques — notamment en termes de fiabilité et de miniaturisation — pourraient poser problème dans des environnements contraints.
 
-Mais comme il amènerai peu de profit à son fabricant à cause de son utilisation un peu niche et d'options plus performantes sur le marché, et ce malgrès son coût très faible, nous pensons qu'il serait difficilement industrialisable. 
+Il pourrait en revanche être largement démocratisé dans le domaine de l’éducation, comme outil d’apprentissage ou de découverte.
+
+Mais malgré son coût très faible, ce capteur reste très niche et la présence d’options plus performantes sur le marché rendent sa rentabilité à l'échelle industrielle peu crédible. Nous pensons donc qu’il serait difficilement industrialisable à grande échelle.
 
 ## Auteurs
 
