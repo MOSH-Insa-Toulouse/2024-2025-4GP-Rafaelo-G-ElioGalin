@@ -92,13 +92,14 @@ Pour pouvoir contrôler les differents modules sur le Arduino UNO, nous avons r�
 - Adafruit_SSD1306 pour contrôler l'écran OLED
 - SoftwareSerial pour contrôler le Bluetooth
 
-Vous pouvez trouver le code Arduino [ici]()
 
 Au branchement de l'Arduino UNO, après avoir envoyé le code, on peut voir sur l'écran OLED un menu déroulant:
 
 -Menu 1 : Graphite sensor
 
 La navigation se fait avec l'encodeur rotatoir, le faire tourner permets de faire defiler les menus, et le cliquer permet d'accéder au menu sélectionné.
+
+Vous pouvez trouver le code Arduino [ici]()
 
 ## Application
 
@@ -112,7 +113,7 @@ L'application est assez simple, Elle permet :
 - d'effacer le graphe.
 - De s'adapter en cas de changement de position du téléphone en offrant un mode paysage.
 
-Vous pouvez la retrouver [ici](/Application Projet Capteur/)
+Vous pouvez la retrouver [ici](/Application-Projet-Capteur/)
 
 ## Datasheet
 
