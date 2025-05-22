@@ -2,11 +2,6 @@
 
 # Projet Capteur
 
-## Principe du Projet
-Dans le Cadre du cours " Du capteur au banc de test", il a été proposé un projet.
-Ce cours se basant sur l'article "Pencil Drawn Strain Gauges and Chemiresistors on Paper" de Cheng-Wei Lin et al., propose d'utiliser un capteur special, composé d'une simple feuille de papier et d'une couche de graphite. Cette couche de graphite permets de créer un resistance dont le but de ce projet est de réaliser un banc de test qui nous permettra d'étudier ses variations en fonction de la déformation du capteur.
-
-
 ## Somaire
 
 - [Principe du Projet](#principe-du-projet)
@@ -21,6 +16,9 @@ Ce cours se basant sur l'article "Pencil Drawn Strain Gauges and Chemiresistors 
 - [Auteurs](#auteurs)
 
 
+## Contexte du Projet
+Dans le Cadre du cours " Du capteur au banc de test", qui se base sur l'article "Pencil Drawn Strain Gauges and Chemiresistors on Paper" de Cheng-Wei Lin et al., les étudiants sont invités à caractériser un capteur particulier composé d'une simple feuille de papier et d'une couche de graphite. Cette couche de graphite joue le rôle d'une resistance variable qui dépend de la flexion du papier. Le but de ce projet est de réaliser un banc de test permettant d'étudier les variations de cette résistance en fonction de la déformation du capteur.
+
 
 ## Livrables
 
@@ -32,24 +30,25 @@ Ce cours se basant sur l'article "Pencil Drawn Strain Gauges and Chemiresistors 
 
 ## LTSpice 
 
-La résistance du capteur graphite ne peut pas être mesuré simplement à cause de sa valeur de l'orde du Méga Ohms. Et dans notre cas, nous utilison une alimentation de 5V ce qui induit par la formule :
+La résistance du capteur graphite est de l'ordre du Méga Ohm et ne peut donc pas se mesurer simplemen. Nous utilison une alimentation 5V, nous avons donc :
 U = R * I --> I = U/R --> I très faible.
 
-Pour pouvoir obtenir des valeurs acceptable, il nous a fallu réaliser un circuit amplificateur à transimpédance : 
+Pour pouvoir obtenir des valeurs acceptables, nous avons réalisé un circuit amplificateur à transimpédance : 
 
 ![LTSpice-shema](/Photos/Circuit-LTSpice.PNG)
 
-Pour l'amplificateur opérationnel necessaire au circuit, nous avons choisi le LTC1050 pour sa capacité accepter un courant d'entrée faible et un offset de tension bas.
+Pour l'amplificateur opérationnel nécessaire au circuit, nous avons choisi le LTC1050 pour sa capacité à accepter un courant d'entrée faible et un offset de tension bas.
 
-POur ameliorer le rapport Signal/Bruit, nous avons ajouté 3 types de filtres : 
+Afin d'améliorer le rapport Signal/Bruit, nous avons ajouté trois filtres : 
 
-- Un filtre passe bas passif en entrée(R1,C1) avec une Fréquence de coupure fc1 = 16Hz.
-- UN filtre passe bas actif couplé à l'amplificateur opérationel(R3,C4) avec une Fréquence de coupure fc2 = 1.6Hz. Ce filtre permet de se libérer du bruit du 50Hz du réseau élèctrique.
-- UN filtre en sortie(R6,C2), avec une fréquence de coupure fc3 = 1.6kHz. Ce filtre permet de s'affranchir du bruit généré par notre circuit.
+- filtre passe bas passif en entrée (R1,C1) avec une fréquence de coupure fc1 = 16Hz.
+- filtre passe bas actif couplé à l'amplificateur opérationnel (R3,C4) avec une Fréquence de coupure fc2 = 1.6Hz. Ce filtre permet de s'isoler du bruit 50Hz du réseau électrique.
+- filtre en sortie (R6,C2), avec une fréquence de coupure fc3 = 1.6kHz. Ce filtre permet de s'affranchir du bruit généré par notre circuit.
+
 
 ## Réalisation informatique du PCB sur KiCAD
 
-Pour la réalisation du PCB, nousa vons utilisé le logiciel KiCAD 6.0. Ce logiciel permet la création de cricuit électrique ainsi que de PCB grâce a ses nombreuses librairies de composants.
+Pour la réalisation du PCB, nous avons utilisé le logiciel KiCAD 6.0. Ce logiciel permet de créer le cricuit électrique ainsi que le PCB grâce à ses nombreuses librairies de composants.
 
 La réalisation du PCB implique l'utilisation de différents modules qu'il faut pouvoir afficher sur le shéma : 
 
@@ -61,25 +60,26 @@ Dans un premier temps, nous avons effectuée le shéma électrique :
 
 ![kicad-shema](/Photos/Kicad-photo.png)
 
-Dans un second temps, un fois que tous les composants étaient bien relié entre eux, nous avons réalisé le PCB :
+Dans un second temps, une fois tous les composants reliés entre eux, nous avons réalisé le PCB :
 
 ![PCB-shema](/Photos/PCB-Projet-Capteur.PNG)
 
-Voici un visuel 3D de ce PCB pour avoir une idée du placement des composants :
+Voici un visuel 3D du PCB pour donner une idée du placement des composants :
 
 ![pcb-3d](/Photos/Vue-3D-PCB.PNG)
 
-Vous pouvez tout retrouver dans le dossier [Kicad](/kicad/capteur graphite CouBeh).
+Vous pouvez tout retrouver en détail dans le dossier [Kicad](/kicad/capteur graphite CouBeh).
+
 
 ## Réalisation physique du PCB
 
-Grâce à l'aide de Catherine Crouzet, nous avons pu fabriquer le PCB nous même.
+Grâce à l'aide de Catherine Crouzet, nous avons pu fabriquer le PCB nous mêmes.
 
-Pour ce faire, on à d'abord creer un fichier Gerber depuis KiCAD :
+Pour ce faire, nous avons tout d'abord créé un fichier Gerber depuis KiCAD :
 
 ![gerber](/Photos/Gerber.PNG)
 
-Ce filtre sert de masque de gravure.Sur une plaquette en epoxy jaune recouverte d'une fine couche de cuivre, elle même recouverte d'une couche de résine, le masque est placé, il sert de porotection pour la résine lors de son passage sous une lampe d'UV. Apres son passage sous la lampe à UV, la plaquette est déposé dans un bain "révélateur", qui retire la couche de résine qui a été en contact avec les UV, et aussi le cuivre en dessous de cette résine. Après un contrôle visuel pour s'assurer de la bonne exécution du processus, la plaque est retiré du bain et lavée à l'eau pour retirer le produit du bain et ensuite à la cetone pour retirer la couche de résine qui a protégé les pistes en cuivre. Le PCB est maintenant près, on peut cliver les parties non nécessaire de la carte pour un rendu parfait.
+Ce filtre sert de masque de gravure. Sur une plaquette en epoxy jaune recouverte d'une fine couche de cuivre, elle même recouverte d'une couche de résine, le masque est placé, il sert de porotection pour la résine lors de son passage sous une lampe d'UV. Apres son passage sous la lampe à UV, la plaquette est déposé dans un bain "révélateur", qui retire la couche de résine qui a été en contact avec les UV, et aussi le cuivre en dessous de cette résine. Après un contrôle visuel pour s'assurer de la bonne exécution du processus, la plaque est retiré du bain et lavée à l'eau pour retirer le produit du bain et ensuite à la cetone pour retirer la couche de résine qui a protégé les pistes en cuivre. Le PCB est maintenant près, on peut cliver les parties non nécessaire de la carte pour un rendu parfait.
 
 Suite à ce processus, il faut percer les trous dans lequels les composants viendrons se loger, et souder les composants passifs ainsi que des connecteurs pour les différents modules pour facilité leur utilisation.(facile de changer de composants lorsqu'il y a un problème)
 
@@ -92,14 +92,13 @@ Pour pouvoir contrôler les differents modules sur le Arduino UNO, nous avons r�
 - Adafruit_SSD1306 pour contrôler l'écran OLED
 - SoftwareSerial pour contrôler le Bluetooth
 
+Vous pouvez trouver le code Arduino [ici]()
 
 Au branchement de l'Arduino UNO, après avoir envoyé le code, on peut voir sur l'écran OLED un menu déroulant:
 
 -Menu 1 : Graphite sensor
 
 La navigation se fait avec l'encodeur rotatoir, le faire tourner permets de faire defiler les menus, et le cliquer permet d'accéder au menu sélectionné.
-
-Vous pouvez trouver le code Arduino [ici]()
 
 ## Application
 
@@ -113,7 +112,7 @@ L'application est assez simple, Elle permet :
 - d'effacer le graphe.
 - De s'adapter en cas de changement de position du téléphone en offrant un mode paysage.
 
-Vous pouvez la retrouver [ici](/Application-Projet-Capteur/)
+Vous pouvez la retrouver [ici](/Application Projet Capteur/)
 
 ## Datasheet
 
@@ -147,4 +146,5 @@ Mais comme il amènerai peu de profit à son fabricant à cause de son utilisati
 
 Rafaëlo GERARDIN : <gerardin@insa-toulouse.fr>
 Elio GALIN : <galin@insa-toulouse.fr>
+
 
