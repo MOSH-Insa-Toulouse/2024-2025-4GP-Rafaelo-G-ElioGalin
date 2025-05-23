@@ -168,6 +168,9 @@ void displayMenu() {
 //---------------------------- Setup ----------------------------
 
 void setup() {
+  
+  btSerial.begin(9600);
+
   pinMode(ENCODER_CLK_PIN, INPUT_PULLUP);
   pinMode(ENCODER_DT_PIN, INPUT_PULLUP);
   pinMode(ENCODER_SW_PIN, INPUT_PULLUP);
