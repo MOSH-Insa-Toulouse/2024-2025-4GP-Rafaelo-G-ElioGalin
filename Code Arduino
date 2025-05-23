@@ -1,9 +1,12 @@
 //---------------------------- Bibliothèques ----------------------------
+#include <SoftwareSerial.h>
 #include <Wire.h>
 #include <Adafruit_SSD1306.h>
 #include <SPI.h>
 
 //---------------------------- Définitions ----------------------------
+
+SoftwareSerial btSerial(7, 8);
 
 #define ENCODER_CLK_PIN 2
 #define ENCODER_DT_PIN 4
@@ -23,8 +26,8 @@ const float R3 = 10000;
 
 #define POT_CS_PIN 10
 const int POT_MAX_POS = 256;
-const long POT_RESISTANCE_INT = 33800;
-float potResistanceExterne;
+const long POT_BASE_RESISTANCE = 33800;
+float potResistanceExtern;
 const byte POT_OFFSET = 125;
 const byte POT_ADDR_0 = 0x11;
 
@@ -69,7 +72,7 @@ float readGraphiteVoltage() {
 
 float calculateGraphiteResistance() {
   float Vadc = readGraphiteVoltage();
-  float Rmes = potResistanceExterne;
+  float Rmes = potResistanceExtern;
   if (Vadc < 0.01) return -1.0;
   float resistance = R2 * (1.0 + R4 / Rmes) * VCC / Vadc - R2 - R3;
   return resistance;
@@ -81,7 +84,7 @@ void setDigitalPotentiometer(int addr, int position) {
   SPI.transfer(addr);
   SPI.transfer(position);
   digitalWrite(POT_CS_PIN, HIGH);
-  potResistanceExterne = (POT_RESISTANCE_INT * position / POT_MAX_POS) + POT_OFFSET;
+  potResistanceExtern = (POT_BASE_RESISTANCE * position / POT_MAX_POS) + POT_OFFSET;
 }
 
 void calibratePotentiometer() {
@@ -194,12 +197,24 @@ void loop() {
 
   float resistance = calculateGraphiteResistance();
 
-  if (resistance >= 0) {
-    int resInt = (int) resistance;
-    int y = map(resInt, -1000, 1000, 0, 1000);
-    Serial.println(y);
-  } else {
-    Serial.println("Erreur");
+ if (resistance >= 0 && resistance <= 10000000) {
+    float y = map(resistance, 0, 12000000, 0, 1000);
+    btSerial.println(y);
+    btSerial.println("\n");
+  } 
+  else if (resistance > 10000000 && resistance <= 100000000) {
+    float y = map(resistance, 0, 120000000, 0, 1000);
+    btSerial.println(y);
+    btSerial.println("\n");
+  }
+  else if (resistance > 100000000) {
+    float y = map(resistance, 0, 1000000000, 0, 1000);
+    btSerial.println(y);
+    btSerial.println("\n");
+  }
+  else {
+    btSerial.println("Erreur");
+    btSerial.println("\n");
   }
 
   delay(500);
